@@ -47,7 +47,7 @@ a {
 }
 
 .friend-card {
-  border: 1px red solid;
+  border: 1px rgb(111, 66, 124) solid;
   margin: 1%;
   background-color: rgba(245, 238, 238, 0.7);
   border-radius: 5px;

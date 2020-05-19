@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 
 const Form = props => {
@@ -30,8 +30,8 @@ const Form = props => {
           email: note.email
         };
     
-        return axios
-          .post(`http://localhost:5000/api,friends`, newFriend)
+        axiosWithAuth()
+          .post(`/api/friends`, newFriend)
           .then(response => {
             console.log(response);
             setNote([...note, newFriend]);
