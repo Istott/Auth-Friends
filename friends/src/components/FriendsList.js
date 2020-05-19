@@ -2,6 +2,7 @@ import React from "react";
 // import moment from "moment";
 import Loader from "react-loader-spinner";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Form from './AddFriend';
 
 class FriendsList extends React.Component {
   state = {
@@ -13,7 +14,7 @@ class FriendsList extends React.Component {
       this.setState({
           fetchingData: true
       })
-      console.log('will mount', this.state.fetchingData)
+    //   console.log('will mount', this.state.fetchingData)
   }
   
 
@@ -24,7 +25,7 @@ class FriendsList extends React.Component {
             fetchingData: false
         })
       }, 1000)
-    console.log('did mount', this.state.fetchingData)
+    // console.log('did mount', this.state.fetchingData)
   }
 
   getData = () => {
@@ -34,7 +35,7 @@ class FriendsList extends React.Component {
     axiosWithAuth()
       .get("/api/friends")
       .then(res => {
-        console.log(res)
+        // console.log(res)
         this.setState({
           friendsList: res.data
         });
@@ -44,7 +45,7 @@ class FriendsList extends React.Component {
 
   formatData = () => {
     const formattedData = [];
-    console.log(this.state.friendsList);
+    // console.log(this.state.friendsList);
     this.state.friendsList.map((friend) => {
         formattedData.push({
             key: friend.id,
@@ -56,43 +57,15 @@ class FriendsList extends React.Component {
     return formattedData;
   };
 
-  //adding friend
-  handleChanges = e => {
-    console.log(friendsList);
-  
-    this.setState({
-      ...friendsList,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  submitForm = (e) => {
-      e.preventDefault();
-
-      const newSmurf = {
-        name: note.name,
-        age: note.age,
-        height: `${note.height} cm`
-      };
-  
-      return axios
-        .post(`http://localhost:3333/smurfs`, newSmurf)
-        .then(response => {
-          console.log(response);
-          setNote([...note, newSmurf]);
-        })
-        .catch(error => {
-          console.log("Sorry no Smurfs", error);
-        });
-    };
 
   render() {
     const friendsList = this.formatData();
-    console.log('return console log', friendsList);
-    console.log('return fetchingdata', this.state.fetchingData)
+    // console.log('return console log', friendsList);
+    // console.log('return fetchingdata', this.state.fetchingData)
     return (
     <div className='friends-container'>
         <h1>How much I Love or Loathe my friends list!</h1>
+        <Form friend={this.state} />
         <div className='loader' >
             {this.state.fetchingData && (
             <div className="key spinner">
