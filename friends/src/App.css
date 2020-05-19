@@ -33,7 +33,9 @@ a {
 }
 
 .friends-container {
-  border: 1px red solid;
+  border-radius: 5px;
+  background-color: rgb(117, 117, 236);
+  margin: 1%;
 }
 
 .spinner {
@@ -41,13 +43,13 @@ a {
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  color: #204963;
+  color: #9cbed3;
 }
 
 .friend-card {
   border: 1px red solid;
   margin: 1%;
-  background-color: gray;
+  background-color: rgba(245, 238, 238, 0.7);
   border-radius: 5px;
 }
 

@@ -1,11 +1,13 @@
 import React from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Loader from "react-loader-spinner";
 
 class Login extends React.Component {
   state = {
     credentials: {
       username: "",
-      password: ""
+      password: "",
+      fetchingData: false
     }
   };
 
@@ -28,8 +30,14 @@ class Login extends React.Component {
       .post("/api/login", this.state.credentials)
       .then(res => {
         console.log(res);
+        setTimeout(() => {
         localStorage.setItem("token", res.data.payload);
         this.props.history.push("/protected");
+        }, 2000)
+        this.setState({
+            fetchingData: true
+        })
+        console.log('will mount', this.state.fetchingData)
       })
       .catch(err => console.log(err));
   };
@@ -52,6 +60,14 @@ class Login extends React.Component {
           />
           <button>Log in</button>
         </form>
+        <div className='loader' >
+            {this.state.fetchingData && (
+            <div className="key spinner">
+                <Loader type="Puff" color="#204963" height="60" width="60" />
+                <p>Loading Data</p>
+            </div>
+            )}
+        </div>
       </div>
     );
   }
